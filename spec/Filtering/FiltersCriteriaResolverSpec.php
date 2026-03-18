@@ -21,12 +21,12 @@ use Sylius\Component\Grid\Parameters;
 
 final class FiltersCriteriaResolverSpec extends ObjectBehavior
 {
-    function it_implements_filters_criteria_resolver_interface(): void
+    public function it_implements_filters_criteria_resolver_interface(): void
     {
         $this->shouldImplement(FiltersCriteriaResolverInterface::class);
     }
 
-    function it_checks_whether_any_criteria_are_available(Grid $grid, Filter $filter): void
+    public function it_checks_whether_any_criteria_are_available(Grid $grid, Filter $filter): void
     {
         $emptyParameters = new Parameters();
         $criteriaParameters = new Parameters(['criteria' => ['czapla']]);
@@ -58,7 +58,7 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
         $this->hasCriteria($grid, $criteriaParameters)->shouldReturn(true);
     }
 
-    function it_gets_default_criteria_from_grid_filters(Grid $grid, Filter $firstFilter, Filter $secondFilter): void
+    public function it_gets_default_criteria_from_grid_filters(Grid $grid, Filter $firstFilter, Filter $secondFilter): void
     {
         $startDate = new \DateTime();
         $endDate = new \DateTime();
@@ -74,7 +74,7 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
         ]);
     }
 
-    function it_gets_criteria_from_parameters(Grid $grid, Filter $firstFilter, Filter $secondFilter): void
+    public function it_gets_criteria_from_parameters(Grid $grid, Filter $firstFilter, Filter $secondFilter): void
     {
         $startDate = new \DateTime();
         $endDate = new \DateTime();
@@ -97,7 +97,7 @@ final class FiltersCriteriaResolverSpec extends ObjectBehavior
         ]);
     }
 
-    function it_prioritizes_parameters_criteria_over_filters_default(
+    public function it_prioritizes_parameters_criteria_over_filters_default(
         Grid $grid,
         Filter $firstFilter,
         Filter $secondFilter

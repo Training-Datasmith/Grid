@@ -21,12 +21,12 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
 
 final class BooleanFilterSpec extends ObjectBehavior
 {
-    function it_implements_filter_interface(): void
+    public function it_implements_filter_interface(): void
     {
         $this->shouldImplement(FilterInterface::class);
     }
 
-    function it_filters_true_boolean_values(
+    public function it_filters_true_boolean_values(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {
@@ -38,7 +38,7 @@ final class BooleanFilterSpec extends ObjectBehavior
         $this->apply($dataSource, 'enabled', BooleanFilter::TRUE, []);
     }
 
-    function it_filters_false_boolean_values(
+    public function it_filters_false_boolean_values(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {

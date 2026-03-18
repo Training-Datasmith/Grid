@@ -22,7 +22,7 @@ use Sylius\Component\Grid\Provider\GridProviderInterface;
 
 final class ArrayGridProviderSpec extends ObjectBehavior
 {
-    function let(ArrayToDefinitionConverterInterface $converter, Grid $firstGrid, Grid $secondGrid, Grid $thirdGrid, Grid $fourthGrid, Grid $fifthGrid): void
+    public function let(ArrayToDefinitionConverterInterface $converter, Grid $firstGrid, Grid $secondGrid, Grid $thirdGrid, Grid $fourthGrid, Grid $fifthGrid): void
     {
         $converter->convert('sylius_admin_tax_category', ['configuration1'])->willReturn($firstGrid);
         $converter->convert('sylius_admin_product', ['configuration2' => 'foo'])->willReturn($secondGrid);
@@ -39,24 +39,24 @@ final class ArrayGridProviderSpec extends ObjectBehavior
         ], new GridConfigurationExtender());
     }
 
-    function it_implements_grid_provider_interface(): void
+    public function it_implements_grid_provider_interface(): void
     {
         $this->shouldImplement(GridProviderInterface::class);
     }
 
-    function it_returns_cloned_grid_definition_by_name(Grid $firstGrid, Grid $secondGrid, Grid $thirdGrid): void
+    public function it_returns_cloned_grid_definition_by_name(Grid $firstGrid, Grid $secondGrid, Grid $thirdGrid): void
     {
         $this->get('sylius_admin_tax_category')->shouldBeLike($firstGrid);
         $this->get('sylius_admin_product')->shouldBeLike($secondGrid);
         $this->get('sylius_admin_order')->shouldBeLike($thirdGrid);
     }
 
-    function it_supports_grid_inheritance(Grid $fourthGrid): void
+    public function it_supports_grid_inheritance(Grid $fourthGrid): void
     {
         $this->get('sylius_admin_product_from_taxon')->shouldBeLike($fourthGrid);
     }
 
-    function it_throws_an_exception_if_grid_does_not_exist(): void
+    public function it_throws_an_exception_if_grid_does_not_exist(): void
     {
         $this
             ->shouldThrow(new UndefinedGridException('sylius_admin_order_item'))
@@ -64,7 +64,7 @@ final class ArrayGridProviderSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_invalid_argument_exception_when_parent_grid_is_not_found(): void
+    public function it_throws_an_invalid_argument_exception_when_parent_grid_is_not_found(): void
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('get', ['sylius_admin_book']);
     }

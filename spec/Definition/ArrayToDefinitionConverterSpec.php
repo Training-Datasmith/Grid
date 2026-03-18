@@ -26,17 +26,17 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class ArrayToDefinitionConverterSpec extends ObjectBehavior
 {
-    function let(EventDispatcherInterface $eventDispatcher): void
+    public function let(EventDispatcherInterface $eventDispatcher): void
     {
         $this->beConstructedWith($eventDispatcher);
     }
 
-    function it_implements_array_to_definition_converter(): void
+    public function it_implements_array_to_definition_converter(): void
     {
         $this->shouldImplement(ArrayToDefinitionConverterInterface::class);
     }
 
-    function it_converts_an_array_to_grid_definition(EventDispatcherInterface $eventDispatcher): void
+    public function it_converts_an_array_to_grid_definition(EventDispatcherInterface $eventDispatcher): void
     {
         $grid = Grid::fromCodeAndDriverConfiguration(
             'sylius_admin_tax_category',

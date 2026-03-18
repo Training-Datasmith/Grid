@@ -21,12 +21,12 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
 
 final class EntityFilterSpec extends ObjectBehavior
 {
-    function it_implements_a_filter_interface(): void
+    public function it_implements_a_filter_interface(): void
     {
         $this->shouldImplement(FilterInterface::class);
     }
 
-    function it_filters_by_id(
+    public function it_filters_by_id(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {
@@ -40,7 +40,7 @@ final class EntityFilterSpec extends ObjectBehavior
         $this->apply($dataSource, 'entity', '7', []);
     }
 
-    function it_filters_with_multiple_ids(
+    public function it_filters_with_multiple_ids(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {
@@ -55,7 +55,7 @@ final class EntityFilterSpec extends ObjectBehavior
         $this->apply($dataSource, 'entity', ['4', '2'], []);
     }
 
-    function it_does_not_filters_when_data_id_is_not_defined(
+    public function it_does_not_filters_when_data_id_is_not_defined(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {

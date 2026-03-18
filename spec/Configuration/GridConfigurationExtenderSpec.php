@@ -18,12 +18,12 @@ use Sylius\Component\Grid\Configuration\GridConfigurationExtender;
 
 final class GridConfigurationExtenderSpec extends ObjectBehavior
 {
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(GridConfigurationExtender::class);
     }
 
-    function it_extends_grid_configuration_from_another_grid(): void
+    public function it_extends_grid_configuration_from_another_grid(): void
     {
         $gridConfiguration = ['foo' => 'fighters'];
         $parentGridConfiguration = ['configuration1' => 'value1', 'foo' => 'bar'];
@@ -34,7 +34,7 @@ final class GridConfigurationExtenderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_does_not_extend_sorting_configuration(): void
+    public function it_does_not_extend_sorting_configuration(): void
     {
         $gridConfiguration = ['foo' => 'fighters'];
         $parentGridConfiguration = ['sorting' => ['name' => 'asc']];
@@ -44,7 +44,7 @@ final class GridConfigurationExtenderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_removes_extends_key(): void
+    public function it_removes_extends_key(): void
     {
         $gridConfiguration = ['extends' => 'Artist'];
         $parentGridConfiguration = [];

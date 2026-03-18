@@ -20,12 +20,12 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
 
 final class DateFilterSpec extends ObjectBehavior
 {
-    function it_implements_a_filter_interface(): void
+    public function it_implements_a_filter_interface(): void
     {
         $this->shouldImplement(FilterInterface::class);
     }
 
-    function it_filters_date_from(
+    public function it_filters_date_from(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {
@@ -47,7 +47,7 @@ final class DateFilterSpec extends ObjectBehavior
         );
     }
 
-    function it_filters_date_from_not_inclusive(
+    public function it_filters_date_from_not_inclusive(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {
@@ -73,7 +73,7 @@ final class DateFilterSpec extends ObjectBehavior
         );
     }
 
-    function it_filters_date_from_with_default_time(
+    public function it_filters_date_from_with_default_time(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {
@@ -99,7 +99,7 @@ final class DateFilterSpec extends ObjectBehavior
         );
     }
 
-    function it_filters_date_to(
+    public function it_filters_date_to(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {
@@ -121,7 +121,7 @@ final class DateFilterSpec extends ObjectBehavior
         );
     }
 
-    function it_filters_date_to_inclusive(
+    public function it_filters_date_to_inclusive(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {
@@ -147,7 +147,7 @@ final class DateFilterSpec extends ObjectBehavior
         );
     }
 
-    function it_filters_date_to_with_default_time(
+    public function it_filters_date_to_with_default_time(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {
@@ -169,7 +169,7 @@ final class DateFilterSpec extends ObjectBehavior
         );
     }
 
-    function it_filters_date_from_to(
+    public function it_filters_date_from_to(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {

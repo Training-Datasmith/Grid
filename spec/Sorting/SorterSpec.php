@@ -25,17 +25,17 @@ use Sylius\Component\Grid\Validation\SortingParametersValidatorInterface;
 
 final class SorterSpec extends ObjectBehavior
 {
-    function let(SortingParametersValidatorInterface $sortingValidator, FieldValidatorInterface $fieldValidator): void
+    public function let(SortingParametersValidatorInterface $sortingValidator, FieldValidatorInterface $fieldValidator): void
     {
         $this->beConstructedWith($sortingValidator, $fieldValidator);
     }
 
-    function it_implements_grid_data_source_sorter_interface(): void
+    public function it_implements_grid_data_source_sorter_interface(): void
     {
         $this->shouldImplement(SorterInterface::class);
     }
 
-    function it_sorts_the_data_source_via_expression_builder_based_on_the_grid_definition(
+    public function it_sorts_the_data_source_via_expression_builder_based_on_the_grid_definition(
         Grid $grid,
         Field $field,
         Field $anotherField,
@@ -64,7 +64,7 @@ final class SorterSpec extends ObjectBehavior
         $this->sort($dataSource, $grid, $parameters);
     }
 
-    function it_sorts_the_data_source_via_expression_builder_based_on_sorting_parameter(
+    public function it_sorts_the_data_source_via_expression_builder_based_on_sorting_parameter(
         Grid $grid,
         Field $field,
         Field $anotherField,

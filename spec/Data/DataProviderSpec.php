@@ -24,7 +24,7 @@ use Sylius\Component\Grid\Sorting\SorterInterface;
 
 final class DataProviderSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         DataSourceProviderInterface $dataSourceProvider,
         FiltersApplicatorInterface $filtersApplicator,
         SorterInterface $sorter
@@ -32,12 +32,12 @@ final class DataProviderSpec extends ObjectBehavior
         $this->beConstructedWith($dataSourceProvider, $filtersApplicator, $sorter);
     }
 
-    function it_implements_grid_data_provider_interface(): void
+    public function it_implements_grid_data_provider_interface(): void
     {
         $this->shouldImplement(DataProviderInterface::class);
     }
 
-    function it_gets_data_from_the_data_source(
+    public function it_gets_data_from_the_data_source(
         DataSourceProviderInterface $dataSourceProvider,
         DataSourceInterface $dataSource,
         FiltersApplicatorInterface $filtersApplicator,

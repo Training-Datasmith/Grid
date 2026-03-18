@@ -21,7 +21,7 @@ use Sylius\Component\Grid\Provider\GridProviderInterface;
 
 class ChainProviderSpec extends ObjectBehavior
 {
-    function let(GridProviderInterface $firstGridProvider, GridProviderInterface $secondGridProvider): void
+    public function let(GridProviderInterface $firstGridProvider, GridProviderInterface $secondGridProvider): void
     {
         $this->beConstructedWith([
             $firstGridProvider->getWrappedObject(),
@@ -29,12 +29,12 @@ class ChainProviderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_is_initializable(): void
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ChainProvider::class);
     }
 
-    function it_get_grids_from_its_providers(
+    public function it_get_grids_from_its_providers(
         GridProviderInterface $firstGridProvider,
         GridProviderInterface $secondGridProvider,
         Grid $gridDefinition
@@ -45,7 +45,7 @@ class ChainProviderSpec extends ObjectBehavior
         $this->get('app_book')->shouldReturn($gridDefinition);
     }
 
-    function it_throws_an_undefined_grid_exception_when_its_providers_do_not_contains_definition(
+    public function it_throws_an_undefined_grid_exception_when_its_providers_do_not_contains_definition(
         GridProviderInterface $firstGridProvider,
         GridProviderInterface $secondGridProvider
     ): void {

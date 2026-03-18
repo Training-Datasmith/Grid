@@ -22,19 +22,19 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
 
 final class ExistsFilterSpec extends ObjectBehavior
 {
-    function it_implements_filter_interface(): void
+    public function it_implements_filter_interface(): void
     {
         $this->shouldImplement(FilterInterface::class);
     }
 
-    function it_does_nothing_if_there_is_no_data(DataSourceInterface $dataSource): void
+    public function it_does_nothing_if_there_is_no_data(DataSourceInterface $dataSource): void
     {
         $dataSource->restrict(Argument::any())->shouldNotBeCalled();
 
         $this->apply($dataSource, Argument::any(), null, []);
     }
 
-    function it_filters_off_all_data_with_provided_field_equal_to_null(
+    public function it_filters_off_all_data_with_provided_field_equal_to_null(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {
@@ -46,7 +46,7 @@ final class ExistsFilterSpec extends ObjectBehavior
         $this->apply($dataSource, Argument::any(), ExistsFilter::TRUE, ['field' => 'fieldName']);
     }
 
-    function it_filters_off_all_data_with_provided_field_not_equal_to_null(
+    public function it_filters_off_all_data_with_provided_field_not_equal_to_null(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {
@@ -58,7 +58,7 @@ final class ExistsFilterSpec extends ObjectBehavior
         $this->apply($dataSource, Argument::any(), ExistsFilter::FALSE, ['field' => 'fieldName']);
     }
 
-    function it_filters_off_data_by_filters_name_if_field_is_not_provided(
+    public function it_filters_off_data_by_filters_name_if_field_is_not_provided(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ): void {

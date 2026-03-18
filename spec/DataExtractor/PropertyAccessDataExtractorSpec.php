@@ -20,17 +20,17 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 final class PropertyAccessDataExtractorSpec extends ObjectBehavior
 {
-    function let(PropertyAccessorInterface $propertyAccessor): void
+    public function let(PropertyAccessorInterface $propertyAccessor): void
     {
         $this->beConstructedWith($propertyAccessor);
     }
 
-    function it_is_a_data_extractor(): void
+    public function it_is_a_data_extractor(): void
     {
         $this->shouldImplement(DataExtractorInterface::class);
     }
 
-    function it_uses_property_accessor_to_extract_the_data(PropertyAccessorInterface $propertyAccessor, Field $field): void
+    public function it_uses_property_accessor_to_extract_the_data(PropertyAccessorInterface $propertyAccessor, Field $field): void
     {
         $field->getPath()->willReturn('foo');
         $propertyAccessor->getValue(['foo' => 'bar'], 'foo')->willReturn('Value');

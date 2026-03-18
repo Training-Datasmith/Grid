@@ -24,17 +24,17 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 
 final class DataSourceProviderSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $driversRegistry): void
+    public function let(ServiceRegistryInterface $driversRegistry): void
     {
         $this->beConstructedWith($driversRegistry);
     }
 
-    function it_implements_grid_data_provider_interface(): void
+    public function it_implements_grid_data_provider_interface(): void
     {
         $this->shouldImplement(DataSourceProviderInterface::class);
     }
 
-    function it_uses_a_correct_driver_to_get_the_data_for_a_grid(
+    public function it_uses_a_correct_driver_to_get_the_data_for_a_grid(
         ServiceRegistryInterface $driversRegistry,
         DataSourceInterface $dataSource,
         DriverInterface $driver,
@@ -52,7 +52,7 @@ final class DataSourceProviderSpec extends ObjectBehavior
         $this->getDataSource($grid, $parameters)->shouldReturn($dataSource);
     }
 
-    function it_throws_an_exception_if_driver_is_not_supported(Grid $grid, ServiceRegistryInterface $driversRegistry): void
+    public function it_throws_an_exception_if_driver_is_not_supported(Grid $grid, ServiceRegistryInterface $driversRegistry): void
     {
         $parameters = new Parameters();
 

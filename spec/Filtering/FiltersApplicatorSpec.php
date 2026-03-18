@@ -26,17 +26,17 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 
 final class FiltersApplicatorSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $filtersRegistry, FiltersCriteriaResolverInterface $criteriaResolver): void
+    public function let(ServiceRegistryInterface $filtersRegistry, FiltersCriteriaResolverInterface $criteriaResolver): void
     {
         $this->beConstructedWith($filtersRegistry, $criteriaResolver);
     }
 
-    function it_implements_filters_applicator_interface(): void
+    public function it_implements_filters_applicator_interface(): void
     {
         $this->shouldImplement(FiltersApplicatorInterface::class);
     }
 
-    function it_does_nothing_when_there_are_no_filtering_criteria(
+    public function it_does_nothing_when_there_are_no_filtering_criteria(
         FiltersCriteriaResolverInterface $criteriaResolver,
         FilterInterface $stringFilter,
         Grid $grid,
@@ -54,7 +54,7 @@ final class FiltersApplicatorSpec extends ObjectBehavior
         $this->apply($dataSource, $grid, $parameters);
     }
 
-    function it_filters_data_source_based_on_filters_default_criteria(
+    public function it_filters_data_source_based_on_filters_default_criteria(
         ServiceRegistryInterface $filtersRegistry,
         FiltersCriteriaResolverInterface $criteriaResolver,
         FilterInterface $stringFilter,
@@ -82,7 +82,7 @@ final class FiltersApplicatorSpec extends ObjectBehavior
         $this->apply($dataSource, $grid, new Parameters());
     }
 
-    function it_filters_data_source_based_on_criteria_parameter(
+    public function it_filters_data_source_based_on_criteria_parameter(
         ServiceRegistryInterface $filtersRegistry,
         FiltersCriteriaResolverInterface $criteriaResolver,
         FilterInterface $stringFilter,

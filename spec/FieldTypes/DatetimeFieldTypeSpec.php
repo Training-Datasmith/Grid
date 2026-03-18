@@ -20,17 +20,17 @@ use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
 
 final class DatetimeFieldTypeSpec extends ObjectBehavior
 {
-    function let(DataExtractorInterface $dataExtractor): void
+    public function let(DataExtractorInterface $dataExtractor): void
     {
         $this->beConstructedWith($dataExtractor);
     }
 
-    function it_is_a_grid_field_type(): void
+    public function it_is_a_grid_field_type(): void
     {
         $this->shouldImplement(FieldTypeInterface::class);
     }
 
-    function it_uses_data_extractor_to_obtain_data_parse_it_with_given_configuration_and_renders_it(
+    public function it_uses_data_extractor_to_obtain_data_parse_it_with_given_configuration_and_renders_it(
         DataExtractorInterface $dataExtractor,
         \DateTime $dateTime,
         Field $field
@@ -44,7 +44,7 @@ final class DatetimeFieldTypeSpec extends ObjectBehavior
         ])->shouldReturn('2001-10-10');
     }
 
-    function it_returns_null_if_property_accessor_returns_null(DataExtractorInterface $dataExtractor, Field $field): void
+    public function it_returns_null_if_property_accessor_returns_null(DataExtractorInterface $dataExtractor, Field $field): void
     {
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn(null);
 
@@ -53,7 +53,7 @@ final class DatetimeFieldTypeSpec extends ObjectBehavior
         ])->shouldReturn('');
     }
 
-    function it_throws_exception_if_returned_value_is_not_datetime(DataExtractorInterface $dataExtractor, Field $field): void
+    public function it_throws_exception_if_returned_value_is_not_datetime(DataExtractorInterface $dataExtractor, Field $field): void
     {
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn('badObject');
 

@@ -89,7 +89,7 @@ class Grid
      */
     public function getEnabledFields(): array
     {
-        return array_filter($this->getFields(), fn(Field $field): bool => $field->isEnabled());
+        return array_filter($this->getFields(), fn (Field $field): bool => $field->isEnabled());
     }
 
     /**
@@ -146,9 +146,11 @@ class Grid
      */
     public function getEnabledActionGroups(): array
     {
-        return array_filter($this->getActionGroups(), 
+        return array_filter(
+            $this->getActionGroups(),
             // TODO: There's no `isEnabled` method on ActionGroup, so we assume all of them are enabled
-            fn(ActionGroup $actionGroup): bool => true);
+            fn (ActionGroup $actionGroup): bool => true
+        );
     }
 
     /**
@@ -197,7 +199,7 @@ class Grid
      */
     public function getEnabledActions(string $groupName): array
     {
-        return array_filter($this->getActions($groupName), fn(Action $action): bool => $action->isEnabled());
+        return array_filter($this->getActions($groupName), fn (Action $action): bool => $action->isEnabled());
     }
 
     public function hasActionGroup(string $name): bool
@@ -218,7 +220,7 @@ class Grid
      */
     public function getEnabledFilters(): array
     {
-        return array_filter($this->getFilters(), fn(Filter $filter): bool => $filter->isEnabled());
+        return array_filter($this->getFilters(), fn (Filter $filter): bool => $filter->isEnabled());
     }
 
     /**

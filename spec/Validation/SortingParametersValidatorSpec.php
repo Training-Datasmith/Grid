@@ -21,12 +21,12 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 final class SortingParametersValidatorSpec extends ObjectBehavior
 {
-    function it_implements_grid_data_source_sorting_validator_interface(): void
+    public function it_implements_grid_data_source_sorting_validator_interface(): void
     {
         $this->shouldImplement(SortingParametersValidatorInterface::class);
     }
 
-    function it_throws_exception_if_wrong_sorting_parameter_provided(
+    public function it_throws_exception_if_wrong_sorting_parameter_provided(
         Grid $grid,
         Field $field,
         Field $anotherField
@@ -40,7 +40,7 @@ final class SortingParametersValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_passes_if_valid_sorting_parameter_provided(
+    public function it_passes_if_valid_sorting_parameter_provided(
         Grid $grid,
         Field $field,
         Field $anotherField

@@ -22,17 +22,17 @@ use Sylius\Component\Grid\View\GridViewFactoryInterface;
 
 final class GridViewFactorySpec extends ObjectBehavior
 {
-    function let(DataProviderInterface $dataProvider): void
+    public function let(DataProviderInterface $dataProvider): void
     {
         $this->beConstructedWith($dataProvider);
     }
 
-    function it_implements_grid_view_factory_interface(): void
+    public function it_implements_grid_view_factory_interface(): void
     {
         $this->shouldImplement(GridViewFactoryInterface::class);
     }
 
-    function it_uses_data_provider_to_create_a_view_with_data_and_definition(
+    public function it_uses_data_provider_to_create_a_view_with_data_and_definition(
         DataProviderInterface $dataProvider,
         Grid $grid
     ): void {

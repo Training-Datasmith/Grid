@@ -21,32 +21,32 @@ use Sylius\Component\Grid\View\GridViewInterface;
 
 final class GridViewSpec extends ObjectBehavior
 {
-    function let(Grid $gridDefinition): void
+    public function let(Grid $gridDefinition): void
     {
         $this->beConstructedWith(['foo', 'bar'], $gridDefinition, new Parameters());
     }
 
-    function it_implements_a_grid_view_interface(): void
+    public function it_implements_a_grid_view_interface(): void
     {
         $this->shouldHaveType(GridViewInterface::class);
     }
 
-    function it_has_data(): void
+    public function it_has_data(): void
     {
         $this->getData()->shouldReturn(['foo', 'bar']);
     }
 
-    function it_has_definition(Grid $gridDefinition): void
+    public function it_has_definition(Grid $gridDefinition): void
     {
         $this->getDefinition()->shouldReturn($gridDefinition);
     }
 
-    function it_has_parameters(): void
+    public function it_has_parameters(): void
     {
         $this->getParameters()->shouldBeLike(new Parameters());
     }
 
-    function it_uses_the_default_sorting_from_definition_if_not_provided_in_parameters(
+    public function it_uses_the_default_sorting_from_definition_if_not_provided_in_parameters(
         Grid $gridDefinition,
         Field $codeField,
         Field $nameField
@@ -68,7 +68,7 @@ final class GridViewSpec extends ObjectBehavior
         $this->isSortedBy('name')->shouldReturn(true);
     }
 
-    function it_knows_which_field_it_has_been_sorted_by(Grid $gridDefinition, Field $codeField, Field $nameField): void
+    public function it_knows_which_field_it_has_been_sorted_by(Grid $gridDefinition, Field $codeField, Field $nameField): void
     {
         $this->beConstructedWith(['foo', 'bar'], $gridDefinition, new Parameters([
             'sorting' => ['name' => ['direction' => 'asc']],
@@ -92,7 +92,7 @@ final class GridViewSpec extends ObjectBehavior
         $this->isSortedBy('code')->shouldReturn(false);
     }
 
-    function it_throws_exception_when_trying_to_sort_by_a_non_existent_field(Grid $gridDefinition): void
+    public function it_throws_exception_when_trying_to_sort_by_a_non_existent_field(Grid $gridDefinition): void
     {
         $gridDefinition->hasField('code')->willReturn(false);
 
@@ -102,7 +102,7 @@ final class GridViewSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_when_trying_to_sort_by_a_non_sortable_field(
+    public function it_throws_exception_when_trying_to_sort_by_a_non_sortable_field(
         Grid $gridDefinition,
         Field $nameField
     ): void {

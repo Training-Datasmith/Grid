@@ -18,12 +18,12 @@ use Sylius\Component\Grid\Definition\Grid;
 
 final class GridDefinitionConverterEventSpec extends ObjectBehavior
 {
-    function let(Grid $grid): void
+    public function let(Grid $grid): void
     {
         $this->beConstructedWith($grid);
     }
 
-    function it_has_a_grid(Grid $grid): void
+    public function it_has_a_grid(Grid $grid): void
     {
         $this->getGrid()->shouldReturn($grid);
     }
