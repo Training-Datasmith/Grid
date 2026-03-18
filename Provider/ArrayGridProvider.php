@@ -22,20 +22,14 @@ use Webmozart\Assert\Assert;
 
 final class ArrayGridProvider implements GridProviderInterface
 {
-    private ArrayToDefinitionConverterInterface $converter;
-
     private GridConfigurationExtenderInterface $gridConfigurationExtender;
 
-    /** @var array[] */
-    private array $gridConfigurations;
-
     public function __construct(
-        ArrayToDefinitionConverterInterface $converter,
-        array $gridConfigurations,
+        private ArrayToDefinitionConverterInterface $converter,
+        /** @var array[] */
+        private array $gridConfigurations,
         ?GridConfigurationExtenderInterface $gridConfigurationExtender = null
     ) {
-        $this->converter = $converter;
-        $this->gridConfigurations = $gridConfigurations;
         $this->gridConfigurationExtender = $gridConfigurationExtender ?? new GridConfigurationExtender();
     }
 

@@ -15,18 +15,13 @@ namespace Sylius\Component\Grid\Definition;
 
 class Action
 {
-    private string $name;
-
-    private string $type;
-
     private ?string $label = null;
 
     private bool $enabled = true;
 
     private ?string $icon = null;
 
-    /** @var array */
-    private $options = [];
+    private array $options = [];
 
     /**
      * Position equals to 100 to ensure that wile sorting actions by position ASC
@@ -34,10 +29,8 @@ class Action
      */
     private int $position = 100;
 
-    private function __construct(string $name, string $type)
+    private function __construct(private string $name, private string $type)
     {
-        $this->name = $name;
-        $this->type = $type;
     }
 
     public static function fromNameAndType(string $name, string $type): self

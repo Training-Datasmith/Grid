@@ -17,33 +17,18 @@ use Webmozart\Assert\Assert;
 
 class Grid
 {
-    private string $code;
+    private array $sorting = [];
 
-    private string $driver;
+    private array $limits = [];
 
-    /** @var array */
-    private $driverConfiguration;
+    private array $fields = [];
 
-    /** @var array */
-    private $sorting = [];
+    private array $filters = [];
 
-    /** @var array */
-    private $limits = [];
+    private array $actionGroups = [];
 
-    /** @var array */
-    private $fields = [];
-
-    /** @var array */
-    private $filters = [];
-
-    /** @var array */
-    private $actionGroups = [];
-
-    private function __construct(string $code, string $driver, array $driverConfiguration)
+    private function __construct(private string $code, private string $driver, private array $driverConfiguration)
     {
-        $this->code = $code;
-        $this->driver = $driver;
-        $this->driverConfiguration = $driverConfiguration;
     }
 
     public static function fromCodeAndDriverConfiguration(string $code, string $driver, array $driverConfiguration): self
@@ -104,9 +89,7 @@ class Grid
      */
     public function getEnabledFields(): array
     {
-        return array_filter($this->getFields(), function (Field $field): bool {
-            return $field->isEnabled();
-        });
+        return array_filter($this->getFields(), fn(Field $field): bool => $field->isEnabled());
     }
 
     /**
@@ -163,10 +146,9 @@ class Grid
      */
     public function getEnabledActionGroups(): array
     {
-        return array_filter($this->getActionGroups(), function (ActionGroup $actionGroup): bool {
+        return array_filter($this->getActionGroups(), 
             // TODO: There's no `isEnabled` method on ActionGroup, so we assume all of them are enabled
-            return true;
-        });
+            fn(ActionGroup $actionGroup): bool => true);
     }
 
     /**
@@ -211,15 +193,11 @@ class Grid
     }
 
     /**
-     * @param string $groupName
-     *
      * @return array|Action[]
      */
-    public function getEnabledActions($groupName): array
+    public function getEnabledActions(string $groupName): array
     {
-        return array_filter($this->getActions($groupName), function (Action $action): bool {
-            return $action->isEnabled();
-        });
+        return array_filter($this->getActions($groupName), fn(Action $action): bool => $action->isEnabled());
     }
 
     public function hasActionGroup(string $name): bool
@@ -240,9 +218,7 @@ class Grid
      */
     public function getEnabledFilters(): array
     {
-        return array_filter($this->getFilters(), function (Filter $filter): bool {
-            return $filter->isEnabled();
-        });
+        return array_filter($this->getFilters(), fn(Filter $filter): bool => $filter->isEnabled());
     }
 
     /**

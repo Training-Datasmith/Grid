@@ -19,21 +19,11 @@ use Webmozart\Assert\Assert;
 
 class GridView implements GridViewInterface
 {
-    /** @var mixed */
-    private $data;
-
-    private Grid $definition;
-
-    private Parameters $parameters;
-
     /**
      * @param mixed $data
      */
-    public function __construct($data, Grid $definition, Parameters $parameters)
+    public function __construct(private $data, private Grid $definition, private Parameters $parameters)
     {
-        $this->data = $data;
-        $this->definition = $definition;
-        $this->parameters = $parameters;
     }
 
     public function getData()

@@ -15,10 +15,6 @@ namespace Sylius\Component\Grid\Definition;
 
 class Field
 {
-    private string $name;
-
-    private string $type;
-
     private string $path;
 
     private string $label;
@@ -27,8 +23,7 @@ class Field
 
     private ?string $sortable = null;
 
-    /** @var array */
-    private $options = [];
+    private array $options = [];
 
     /**
      * Position equals to 100 to ensure that wile sorting fields by position ASC
@@ -36,13 +31,10 @@ class Field
      */
     private int $position = 100;
 
-    private function __construct(string $name, string $type)
+    private function __construct(private string $name, private string $type)
     {
-        $this->name = $name;
-        $this->type = $type;
-
-        $this->path = $name;
-        $this->label = $name;
+        $this->path = $this->name;
+        $this->label = $this->name;
     }
 
     public static function fromNameAndType(string $name, string $type): self

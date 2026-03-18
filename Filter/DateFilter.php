@@ -56,7 +56,7 @@ final class DateFilter implements FilterInterface
      *
      * @return mixed
      */
-    private function getOption(array $options, string $name, $default)
+    private function getOption(array $options, string $name, string|bool $default)
     {
         return $options[$name] ?? $default;
     }

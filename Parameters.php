@@ -15,15 +15,11 @@ namespace Sylius\Component\Grid;
 
 final class Parameters
 {
-    /** @var array<string, mixed> */
-    private $parameters;
-
     /**
      * @param array<string, mixed> $parameters
      */
-    public function __construct(array $parameters = [])
+    public function __construct(private array $parameters = [])
     {
-        $this->parameters = $parameters;
     }
 
     public function all(): array

@@ -15,14 +15,11 @@ namespace Sylius\Component\Grid\Definition;
 
 class ActionGroup
 {
-    private string $name;
-
     /** @var Action[] */
-    private $actions = [];
+    private array $actions = [];
 
-    private function __construct(string $name)
+    private function __construct(private string $name)
     {
-        $this->name = $name;
     }
 
     public static function named(string $name): self

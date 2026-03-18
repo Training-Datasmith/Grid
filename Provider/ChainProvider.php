@@ -18,11 +18,8 @@ use Sylius\Component\Grid\Exception\UndefinedGridException;
 
 final class ChainProvider implements GridProviderInterface
 {
-    private iterable $providers;
-
-    public function __construct(iterable $providers)
+    public function __construct(private iterable $providers)
     {
-        $this->providers = $providers;
     }
 
     public function get(string $code): Grid
@@ -30,7 +27,7 @@ final class ChainProvider implements GridProviderInterface
         foreach ($this->providers as $provider) {
             try {
                 return $provider->get($code);
-            } catch (UndefinedGridException $exception) {
+            } catch (UndefinedGridException) {
             }
         }
 

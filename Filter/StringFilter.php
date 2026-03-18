@@ -84,31 +84,20 @@ final class StringFilter implements FilterInterface
         ExpressionBuilderInterface $expressionBuilder,
         string $type,
         string $field,
-        $value
+        string $value
     ) {
-        switch ($type) {
-            case self::TYPE_EQUAL:
-                return $expressionBuilder->equals($field, $value);
-            case self::TYPE_NOT_EQUAL:
-                return $expressionBuilder->notEquals($field, $value);
-            case self::TYPE_EMPTY:
-                return $expressionBuilder->isNull($field);
-            case self::TYPE_NOT_EMPTY:
-                return $expressionBuilder->isNotNull($field);
-            case self::TYPE_CONTAINS:
-                return $expressionBuilder->like($field, '%' . $value . '%');
-            case self::TYPE_NOT_CONTAINS:
-                return $expressionBuilder->notLike($field, '%' . $value . '%');
-            case self::TYPE_STARTS_WITH:
-                return $expressionBuilder->like($field, $value . '%');
-            case self::TYPE_ENDS_WITH:
-                return $expressionBuilder->like($field, '%' . $value);
-            case self::TYPE_IN:
-                return $expressionBuilder->in($field, array_map('trim', explode(',', $value)));
-            case self::TYPE_NOT_IN:
-                return $expressionBuilder->notIn($field, array_map('trim', explode(',', $value)));
-            default:
-                throw new \InvalidArgumentException(sprintf('Could not get an expression for type "%s"!', $type));
-        }
+        return match ($type) {
+            self::TYPE_EQUAL => $expressionBuilder->equals($field, $value),
+            self::TYPE_NOT_EQUAL => $expressionBuilder->notEquals($field, $value),
+            self::TYPE_EMPTY => $expressionBuilder->isNull($field),
+            self::TYPE_NOT_EMPTY => $expressionBuilder->isNotNull($field),
+            self::TYPE_CONTAINS => $expressionBuilder->like($field, '%' . $value . '%'),
+            self::TYPE_NOT_CONTAINS => $expressionBuilder->notLike($field, '%' . $value . '%'),
+            self::TYPE_STARTS_WITH => $expressionBuilder->like($field, $value . '%'),
+            self::TYPE_ENDS_WITH => $expressionBuilder->like($field, '%' . $value),
+            self::TYPE_IN => $expressionBuilder->in($field, array_map('trim', explode(',', $value))),
+            self::TYPE_NOT_IN => $expressionBuilder->notIn($field, array_map('trim', explode(',', $value))),
+            default => throw new \InvalidArgumentException(sprintf('Could not get an expression for type "%s"!', $type)),
+        };
     }
 }

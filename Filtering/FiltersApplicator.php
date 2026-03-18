@@ -22,14 +22,11 @@ final class FiltersApplicator implements FiltersApplicatorInterface
 {
     private ServiceRegistryInterface $filtersRegistry;
 
-    private FiltersCriteriaResolverInterface $criteriaResolver;
-
     public function __construct(
         ServiceRegistryInterface $filtersRegistry,
-        FiltersCriteriaResolverInterface $criteriaResolver
+        private FiltersCriteriaResolverInterface $criteriaResolver
     ) {
         $this->filtersRegistry = $filtersRegistry;
-        $this->criteriaResolver = $criteriaResolver;
     }
 
     public function apply(DataSourceInterface $dataSource, Grid $grid, Parameters $parameters): void

@@ -21,16 +21,17 @@ final class FiltersCriteriaResolver implements FiltersCriteriaResolverInterface
 {
     public function hasCriteria(Grid $grid, Parameters $parameters): bool
     {
-        return $parameters->has('criteria') || !empty($this->getFiltersDefaultCriteria($grid->getFilters()));
+        if ($parameters->has('criteria')) {
+            return true;
+        }
+        return !empty($this->getFiltersDefaultCriteria($grid->getFilters()));
     }
 
     public function getCriteria(Grid $grid, Parameters $parameters): array
     {
         $defaultCriteria = array_map(
             /** @return mixed */
-            function (Filter $filter) {
-                return $filter->getCriteria();
-            },
+            fn(Filter $filter) => $filter->getCriteria(),
             $this->getFiltersDefaultCriteria($grid->getFilters())
         );
 
@@ -44,8 +45,6 @@ final class FiltersCriteriaResolver implements FiltersCriteriaResolverInterface
      */
     private function getFiltersDefaultCriteria(array $filters): array
     {
-        return array_filter($filters, function (Filter $filter) {
-            return null !== $filter->getCriteria();
-        });
+        return array_filter($filters, fn(Filter $filter) => null !== $filter->getCriteria());
     }
 }
