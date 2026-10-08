@@ -20,7 +20,7 @@ final class SelectFilter implements FilterInterface
 {
     public function apply(DataSourceInterface $dataSource, string $name, $data, array $options): void
     {
-        if (empty($data)) {
+        if (empty($data) && 0 !== $data && '0' !== $data) {
             return;
         }
 

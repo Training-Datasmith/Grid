@@ -35,10 +35,12 @@
         "symfony/deprecation-contracts": "^2.2",
         "symfony/event-dispatcher": "^4.4 || ^5.4",
         "symfony/http-kernel": "^4.4 || ^5.4",
+        "symfony/options-resolver": "^4.4 || ^5.4",
         "webmozart/assert": "^1.9"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",
+        "phpunit/phpunit": "9.6.38",
         "symfony/property-access": "^4.4 || ^5.4"
     },
     "extra": {
@@ -53,7 +55,13 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Component\\Grid\\spec\\": "spec/"
+            "Sylius\\Component\\Grid\\spec\\": "spec/",
+            "Sylius\\Component\\Grid\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "8.0.30"
         }
     }
 }

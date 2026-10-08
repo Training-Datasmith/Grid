@@ -20,7 +20,7 @@ final class SortingParametersValidator implements SortingParametersValidatorInte
     public function validateSortingParameters(array $sorting, array $enabledFields): void
     {
         foreach (array_keys($enabledFields) as $key) {
-            if (array_key_exists($key, $sorting) && !in_array($sorting[$key], ['asc', 'desc'])) {
+            if (array_key_exists($key, $sorting) && !in_array($sorting[$key], ['asc', 'desc'], true)) {
                 throw new BadRequestHttpException(sprintf('%s is not valid, use asc or desc instead.', $sorting[$key]));
             }
         }
