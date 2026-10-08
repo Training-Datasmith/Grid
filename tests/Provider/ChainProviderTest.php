@@ -24,13 +24,26 @@ final class ChainProviderTest extends TestCase
         self::assertSame($grid, $chain->get('app_book'));
     }
 
+    public function testStopsAtFirstProviderThatReturnsGrid(): void
+    {
+        $grid = Grid::fromCodeAndDriverConfiguration('app', 'array', []);
+        $first = new FixedProvider($grid);
+        $second = new CountingProvider();
+        $chain = new ChainProvider([$first, $second]);
+
+        self::assertSame($grid, $chain->get('app_book'));
+        self::assertSame(0, $second->calls);
+    }
+
     public function testNonUndefinedExceptionPropagates(): void
     {
         $chain = new ChainProvider([new RuntimeThrowingProvider()]);
 
-        AssertThrows::throwable(\RuntimeException::class, function () use ($chain): void {
+        $exception = AssertThrows::throwable(\RuntimeException::class, function () use ($chain): void {
             $chain->get('app');
         });
+
+        self::assertStringContainsString('boom', $exception->getMessage());
     }
 
     public function testAllProvidersTriedThenUndefinedGridException(): void

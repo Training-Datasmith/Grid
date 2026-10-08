@@ -28,7 +28,7 @@ final class SortingParametersValidatorTest extends TestCase
         $this->validator->validateSortingParameters(['name' => 'asc'], $this->fields);
         $this->validator->validateSortingParameters(['name' => 'desc'], $this->fields);
 
-        self::assertTrue(true);
+        $this->expectNotToPerformAssertions();
     }
 
     public function testBooleanTrueIsRejected(): void

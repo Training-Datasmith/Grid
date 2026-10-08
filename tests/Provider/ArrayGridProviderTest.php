@@ -39,7 +39,7 @@ final class ArrayGridProviderTest extends TestCase
         self::assertArrayNotHasKey('extends', $converter->lastConfiguration);
         self::assertSame(1, $converter->lastConfiguration['driver']['options']['x']);
         self::assertSame(2, $converter->lastConfiguration['driver']['options']['y']);
-        self::assertInstanceOf(Grid::class, $grid);
+        self::assertSame($converter->lastGrid, $grid);
     }
 
     public function testMissingParentThrows(): void
@@ -61,15 +61,18 @@ final class RecordingConverter implements ArrayToDefinitionConverterInterface
     /** @var array<string, mixed> */
     public array $lastConfiguration = [];
 
+    public ?Grid $lastGrid = null;
+
     public function convert(string $code, array $configuration): Grid
     {
         $this->lastCode = $code;
         $this->lastConfiguration = $configuration;
-
-        return Grid::fromCodeAndDriverConfiguration(
+        $this->lastGrid = Grid::fromCodeAndDriverConfiguration(
             $code,
             $configuration['driver']['name'] ?? 'array',
             $configuration['driver']['options'] ?? []
         );
+
+        return $this->lastGrid;
     }
 }

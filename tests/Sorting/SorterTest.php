@@ -42,6 +42,7 @@ final class SorterTest extends TestCase
 
         $this->sorter->sort($dataSource, $grid, new Parameters(['sorting' => ['name' => 'asc']]));
 
+        self::assertCount(1, $dataSource->expressionBuilder->calls);
         self::assertSame(['translation.name', 'asc'], $dataSource->expressionBuilder->calls[0]['args']);
     }
 
@@ -88,6 +89,7 @@ final class SorterTest extends TestCase
         $name->setSortable('translation.name');
         $grid->addField($name);
         $code = Field::fromNameAndType('code', 'string');
+        $code->setSortable('translation.code');
         $grid->addField($code);
 
         return $grid;

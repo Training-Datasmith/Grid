@@ -36,6 +36,6 @@ final class FieldValidatorTest extends TestCase
 
         $validator->validateFieldName('name', $fields);
 
-        self::assertTrue(true);
+        $this->expectNotToPerformAssertions();
     }
 }

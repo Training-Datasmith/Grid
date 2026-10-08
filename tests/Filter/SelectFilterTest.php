@@ -6,6 +6,7 @@ namespace Sylius\Component\Grid\Tests\Filter;
 
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Grid\Filter\SelectFilter;
+use Sylius\Component\Grid\Tests\AssertRestrictions;
 use Sylius\Component\Grid\Tests\Double\RecordingDataSource;
 
 final class SelectFilterTest extends TestCase
@@ -21,10 +22,12 @@ final class SelectFilterTest extends TestCase
     {
         $dataSource = new RecordingDataSource();
         $this->filter->apply($dataSource, 'select', '7', []);
+        AssertRestrictions::assertAt($dataSource, 0, AssertRestrictions::tokenAt($dataSource, 0));
         self::assertSame('equals', $dataSource->expressionBuilder->calls[0]['method']);
 
         $dataSource = new RecordingDataSource();
         $this->filter->apply($dataSource, 'select', ['4', '2'], []);
+        AssertRestrictions::assertAt($dataSource, 0, AssertRestrictions::tokenAt($dataSource, 0));
         self::assertSame('in', $dataSource->expressionBuilder->calls[0]['method']);
     }
 
@@ -32,16 +35,31 @@ final class SelectFilterTest extends TestCase
     {
         $dataSource = new RecordingDataSource();
         $this->filter->apply($dataSource, 'select', '0', []);
+        AssertRestrictions::assertCount($dataSource, 1);
+        AssertRestrictions::assertAt($dataSource, 0, AssertRestrictions::tokenAt($dataSource, 0));
         self::assertSame('equals', $dataSource->expressionBuilder->calls[0]['method']);
         self::assertSame('0', $dataSource->expressionBuilder->calls[0]['args'][1]);
 
         $dataSource = new RecordingDataSource();
         $this->filter->apply($dataSource, 'select', 0, []);
+        AssertRestrictions::assertCount($dataSource, 1);
+        AssertRestrictions::assertAt($dataSource, 0, AssertRestrictions::tokenAt($dataSource, 0));
         self::assertSame(0, $dataSource->expressionBuilder->calls[0]['args'][1]);
 
         $dataSource = new RecordingDataSource();
         $this->filter->apply($dataSource, 'select', ['0'], []);
+        AssertRestrictions::assertCount($dataSource, 1);
+        AssertRestrictions::assertAt($dataSource, 0, AssertRestrictions::tokenAt($dataSource, 0));
         self::assertSame(['0'], $dataSource->expressionBuilder->calls[0]['args'][1]);
+    }
+
+    public function testFieldOptionOverridesName(): void
+    {
+        $dataSource = new RecordingDataSource();
+        $this->filter->apply($dataSource, 'select', '7', ['field' => 'category']);
+
+        AssertRestrictions::assertAt($dataSource, 0, AssertRestrictions::tokenAt($dataSource, 0));
+        self::assertSame(['category', '7'], $dataSource->expressionBuilder->calls[0]['args']);
     }
 
     public function testEmptyStringDoesNothing(): void

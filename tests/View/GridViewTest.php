@@ -45,7 +45,7 @@ final class GridViewTest extends TestCase
         self::assertSame('desc', $view->getSortingOrder('name'));
     }
 
-    public function testMergedSortingOrderForInactiveSortableField(): void
+    public function testInactiveSortableFieldFallsBackToDefaultDirection(): void
     {
         $grid = $this->gridWithSortableFields();
         $grid->setSorting(['name' => 'asc']);

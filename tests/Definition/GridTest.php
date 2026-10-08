@@ -110,4 +110,45 @@ final class GridTest extends TestCase
 
         self::assertCount(2, $this->grid->getEnabledActionGroups());
     }
+
+    public function testDuplicateFilterThrows(): void
+    {
+        $filter = Filter::fromNameAndType('enabled', 'boolean');
+        $this->grid->addFilter($filter);
+
+        $exception = AssertThrows::throwable(\InvalidArgumentException::class, function () use ($filter): void {
+            $this->grid->addFilter($filter);
+        });
+
+        self::assertStringContainsString('enabled', $exception->getMessage());
+    }
+
+    public function testMissingFilterThrows(): void
+    {
+        $exception = AssertThrows::throwable(\InvalidArgumentException::class, function (): void {
+            $this->grid->getFilter('missing');
+        });
+
+        self::assertStringContainsString('missing', $exception->getMessage());
+    }
+
+    public function testDuplicateActionGroupThrows(): void
+    {
+        $this->grid->addActionGroup(ActionGroup::named('row'));
+
+        $exception = AssertThrows::throwable(\InvalidArgumentException::class, function (): void {
+            $this->grid->addActionGroup(ActionGroup::named('row'));
+        });
+
+        self::assertStringContainsString('row', $exception->getMessage());
+    }
+
+    public function testMissingActionGroupThrows(): void
+    {
+        $exception = AssertThrows::throwable(\InvalidArgumentException::class, function (): void {
+            $this->grid->getActionGroup('missing');
+        });
+
+        self::assertStringContainsString('missing', $exception->getMessage());
+    }
 }

@@ -51,7 +51,10 @@
     "autoload": {
         "psr-4": {
             "Sylius\\Component\\Grid\\": ""
-        }
+        },
+        "exclude-from-classmap": [
+            "tests/"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

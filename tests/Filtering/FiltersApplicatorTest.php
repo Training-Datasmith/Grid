@@ -12,6 +12,7 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
 use Sylius\Component\Grid\Filtering\FiltersApplicator;
 use Sylius\Component\Grid\Filtering\FiltersCriteriaResolver;
 use Sylius\Component\Grid\Parameters;
+use Sylius\Component\Grid\Tests\AssertRestrictions;
 use Sylius\Component\Grid\Tests\AssertThrows;
 use Sylius\Component\Grid\Tests\Double\RecordingDataSource;
 use Sylius\Component\Registry\ServiceRegistry;
@@ -43,7 +44,8 @@ final class FiltersApplicatorTest extends TestCase
             'criteria' => ['keywords' => 'Banana', 'enabled' => true],
         ]));
 
-        self::assertCount(1, $dataSource->restrictions);
+        AssertRestrictions::assertCount($dataSource, 1);
+        AssertRestrictions::assertAt($dataSource, 0, AssertRestrictions::tokenAt($dataSource, 0));
         self::assertSame('like', $dataSource->expressionBuilder->calls[0]['method']);
     }
 

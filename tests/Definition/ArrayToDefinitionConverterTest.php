@@ -7,6 +7,7 @@ namespace Sylius\Component\Grid\Tests\Definition;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Grid\Definition\ArrayToDefinitionConverter;
 use Sylius\Component\Grid\Event\GridDefinitionConverterEvent;
+use Sylius\Component\Grid\Tests\Double\RecordingEventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 final class ArrayToDefinitionConverterTest extends TestCase
@@ -100,5 +101,17 @@ final class ArrayToDefinitionConverterTest extends TestCase
 
         self::assertSame([], $grid->getSorting());
         self::assertSame([], $grid->getLimits());
+    }
+
+    public function testEventNameStripsSyliusPrefix(): void
+    {
+        $dispatcher = new RecordingEventDispatcher();
+        $converter = new ArrayToDefinitionConverter($dispatcher);
+
+        $converter->convert('sylius_admin_book', [
+            'driver' => ['name' => 'array', 'options' => []],
+        ]);
+
+        self::assertSame('sylius.grid.admin_book', $dispatcher->lastEventName);
     }
 }
